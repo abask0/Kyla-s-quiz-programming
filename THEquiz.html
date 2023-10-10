@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+    <style>
+        #Title { color: rebeccapurple; font-size: 50px; }
+        #questiontracker { background-color: azure; }
+        #Questionimage {
+            height: 230px;
+            width: 430px;
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            margin: 0 auto; /* to center the div */
+            margin-top: 12px; 
+            margin-bottom: 12px; 
+        }
+        body {
+            text-align: center;
+            background-color: rgb(73, 30, 105);
+            color: floralwhite;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        .color-option { /* styling for the div choice options - all same sizing and spacing*/
+            height: 200px;
+            width: 260px;
+            float: left;
+            margin: 8px;
+            cursor: pointer; /* the user can see that the divs are clickable to show it is a link or item that can be clicked*/
+        }
+    </style>
+</head>
+<body>
+    <div id="Title">Kyla's Quiz</div>
+    <h1 id="questionSpace"></h1>
+    <div id="questiontracker"> </div>
+    <h2 id="message"></h2>
+    <div id="Questionimage"></div>
+    <div id="choiceSpace"></div>
+
+    <script>
+        var questionSpace = document.getElementById("questionSpace");
+        var questiontracker = document.getElementById("questiontracker");
+        var message = document.getElementById("message");
+        var questionImage = document.getElementById("Questionimage");
+        var choiceSpace = document.getElementById("choiceSpace");
+
+        var quizQuestions = [
+            {
+                question: "What colour is the plant pot Mr Beast is hiding in?",
+                answer: "#018E9A",
+                choices: ["#664B84", "#3F4953", "#AA0439", "#018E9A"],
+                imageURL: "ShelfBeast.png" 
+            },
+            {
+                question: "What colour hoodie is Mr Beast wearing?",
+                answer: "#E5042B",
+                choices: ["#2B3C71", "#E5042B", "#E39A0E", "#D5D4CF"],
+                imageURL: "BeastBook.png" 
+            },
+            {
+                question: "What colour is the shirt pocket Mr Beast is hiding in?",
+                answer: "#F5804E",
+                choices: ["#E1DEE2", "#D9CAB9", "#6E674E", "#F5804E"],
+                imageURL: "BeastBeach.png" 
+            },
+            {
+                question: "What colour shirt is Mr Beast wearing?",
+                answer: "white",
+                choices: ["green", "red", "yellow", "white"],
+                imageURL: "BeastJungle.png" 
+            },
+            {
+                question: "What colour is Mr Beast's hat?",
+                answer: "#626061",
+                choices: ["#626061", "#8A3737", "#5A3586", "#863573"],
+                imageURL: "BeastForest.png" 
+            },
+            {
+                question: "What colour is the shirt Mr Beast is wearing?",
+                answer: "#8A6600",
+                choices: ["#8A6600", "#CC684B", "#1E9FB4", "#2C511B"],
+                imageURL: "BeastDesk.png" 
+            },
+            {
+                question: "What colour is Mr Beast's shorts?",
+                answer: "#F5804E",
+                choices: ["black", "gray", "#3F434B", "white"],
+                imageURL: "BeastChallenge.png" 
+            },
+            {
+                question: "What colour is the shirt pocket Wally is hiding in",
+                answer: "#F5804E",
+                choices: ["#E1DEE2", "#D9CAB9", "#6E674E", "#F5804E"],
+                imageURL: "BeastBeach.png" 
+            },
+            {
+                question: "What colour is the shirt pocket Wally is hiding in",
+                answer: "#F5804E",
+                choices: ["#E1DEE2", "#D9CAB9", "#6E674E", "#F5804E"],
+                imageURL: "BeastBeach.png" 
+            },
+            {
+                question: "What colour is the shirt pocket Wally is hiding in",
+                answer: "#F5804E",
+                choices: ["#E1DEE2", "#D9CAB9", "#6E674E", "#F5804E"],
+                imageURL: "BeastBeach.png" 
+            },
+            {
+                question: "What colour is the shirt pocket Wally is hiding in",
+                answer: "#F5804E",
+                choices: ["#E1DEE2", "#D9CAB9", "#6E674E", "#F5804E"],
+                imageURL: "BeastBeach.png" 
+            },
+            {
+                question: "What colour is the shirt pocket Wally is hiding in",
+                answer: "#F5804E",
+                choices: ["#E1DEE2", "#D9CAB9", "#6E674E", "#F5804E"],
+                imageURL: "BeastBeach.png" 
+            },
+            {
+                question: "What colour is the shirt pocket Wally is hiding in",
+                answer: "#F5804E",
+                choices: ["#E1DEE2", "#D9CAB9", "#6E674E", "#F5804E"],
+                imageURL: "BeastBeach.png" 
+            },
+            {
+                question: "What colour is the shirt pocket Wally is hiding in",
+                answer: "#F5804E",
+                choices: ["#E1DEE2", "#D9CAB9", "#6E674E", "#F5804E"],
+                imageURL: "BeastBeach.png" 
+            },
+            {
+                question: "What colour is the shirt pocket Wally is hiding in",
+                answer: "#F5804E",
+                choices: ["#E1DEE2", "#D9CAB9", "#6E674E", "#F5804E"],
+                imageURL: "BeastBeach.png" 
+            },
+        ];
+
+        var questionState = 0;
+        var score = 0;
+
+        function update() {
+            if (questionState == quizQuestions.length) {
+                message.innerHTML = "Your score is " + score + "/15";
+                questionSpace.innerHTML = "";
+                choiceSpace.innerHTML = "";
+                questionImage.style.backgroundImage = "none";
+            } else {
+                questionSpace.innerHTML = quizQuestions[questionState]['question'];
+                choiceSpace.innerHTML = "";
+                questionImage.style.backgroundImage = "url('" + quizQuestions[questionState]['imageURL'] + "')";
+                quizQuestions[questionState]['choices'].forEach(function (choice) {
+                    var divcolour = document.createElement('div');
+                    divcolour.className = 'color-option'; 
+                    divcolour.style.backgroundColor = choice;
+                    divcolour.addEventListener('click', function () {
+                        submit(choice);
+                    });
+                    choiceSpace.appendChild(divcolour);
+                });
+            }
+        }
+
+        function submit(selectedChoice) {
+            if (selectedChoice === quizQuestions[questionState]['answer']) {
+                score++;
+            }
+            questionState++;
+            update();
+        }
+
+        update();
+    </script>
+</body>
+</html>
