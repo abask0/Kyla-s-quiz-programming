@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <title>Mr Beast Quiz</title>
+    <style>
+        #Title { color: rebeccapurple; font-size: 36px; }
+        #questiontracker { background-color: azure; }
+        #Questionimage {
+            height: 230px;
+            width: 430px;
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            margin: 0 auto; /* to center the div */
+            margin-top: 12px; 
+            margin-bottom: 12px; 
+        }
+        body {
+            text-align: center;
+            background-color: rgb(73, 30, 105);
+            color: floralwhite;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        .color-option { /* styling for the div choice options - all same sizing and spacing*/
+            height: 200px;
+            width: 260px;
+            float: left;
+            margin: 8px;
+            cursor: pointer; /* the user can see that the divs are clickable to show it is a link or item that can be clicked*/
+        }
+
+
+    </style>
+</head>
+<body>
+   
+    <div id="Title">Kyla's Quiz</div>
+    <h1 id="questionSpace"></h1>
+    <h2 id="message"></h2>
+    <h3 id="levelMessage"></h3>
+    <div id="Questionimage"></div>
+    <div id="choiceSpace"></div> 
+
+    <script>
+        var questionSpace = document.getElementById("questionSpace"); // The HTML id is gotten from its id and is assigned to the variable
+        var message = document.getElementById("message");
+        var levelMessage = document.getElementById("levelMessage")
+        var questionImage = document.getElementById("Questionimage");
+        var choiceSpace = document.getElementById("choiceSpace"); 
+
+        var quizQuestions = [
+            {
+                question: "What colour is the plant pot Mr Beast is hiding in?", //question shown - rotates after every answer
+                answer: "#018E9A", //answer is a colour and is one of the choices
+                choices: ["#664B84", "#3F4953", "#AA0439", "#018E9A"], //multiple colours - the divs automatically change to the colour of these choices
+                imageURL: "ShelfBeast.png" // for the image shown relating to the question rotating according to the question number
+            },
+            {
+                question: "What colour hoodie is Mr Beast wearing?",
+                answer: "#E5042B",
+                choices: ["#2B3C71", "#E5042B", "#E39A0E", "#D5D4CF"],
+                imageURL: "BeastBook.png" 
+            },
+            {
+                question: "What colour is the shirt pocket Mr Beast is hiding in?",
+                answer: "#F5804E",
+                choices: ["#E1DEE2", "#D9CAB9", "#6E674E", "#F5804E"],
+                imageURL: "BeastBeach.png" 
+            },
+            {
+                question: "What colour shirt is Mr Beast wearing?",
+                answer: "white",
+                choices: ["green", "red", "yellow", "white"],
+                imageURL: "BeastJungle.png" 
+            },
+            {
+                question: "What colour is Mr Beast's hat?",
+                answer: "#626061",
+                choices: ["#626061", "#8A3737", "#5A3586", "#863573"],
+                imageURL: "BeastForest.png" 
+            },
+            {
+                question: "What colour is the shirt Mr Beast is wearing?",
+                answer: "#8A6600",
+                choices: ["#8A6600", "#CC684B", "#1E9FB4", "#2C511B"],
+                imageURL: "BeastDesk.png" 
+            },
+            {
+                question: "What colour is Mr Beast's shorts?",
+                answer: "white",
+                choices: ["black", "gray", "#3F434B", "white"],
+                imageURL: "BeastChallenge.png" 
+            },
+            {
+                question: "What colour is Mr Beast's hoodie?",
+                answer: "black",
+                choices: ["#3e7ae3", "black", "#B5D8E2", "#3F371D"],
+                imageURL: "BeastSpace.png" 
+            },
+            {
+                question: "What colour hat is Mr Beast wearing?",
+                answer: "#92C64F",
+                choices: ["#783B0C", "#365509", "#70BAE7", "#92C64F"],
+                imageURL: "BeastMine.png" 
+            },
+            {
+                question: "What colour shirt is Mr Beast wearing?",
+                answer: "#D8E4F2",
+                choices: ["#D8E4F2", "#0D2F85", "#5C1317", "#2FA18F"],
+                imageURL: "BeastClass.png" 
+            },
+            {
+                question: "What colour is Mr Beast?",
+                answer: "#E0FF64",
+                choices: ["#322D31", "#E0002B", "#008ED4", "#E0FF64"],
+                imageURL: "BeastNeon.png" 
+            },
+            {
+                question: "What colour is Mr Beast's hoodie?",
+                answer: "red",
+                choices: ["red", "blue", "green", "pink"],
+                imageURL: "BeastWally.png" 
+            },
+            {
+                question: "What colour is the hoodie Mr Beast is wearing?",
+                answer: "black",
+                choices: ["#8A6600", "black", "#1E9FB4", "#693A2D"],
+                imageURL: "BeastChocolate.png" 
+            },
+            {
+                question: "What colour shirt is Mr Beast wearing?",
+                answer: "white",
+                choices: ["gray", "white", "#76373A", "black"],
+                imageURL: "BeastCrowd.png" 
+            },
+            {
+                question: "What colour is Mr Beast's hoodie?",
+                answer: "black",
+                choices: ["black", "red", "darkblue", "gray"],
+                imageURL: "BeastBieber.png" 
+            },
+    
+    
+        ];
+            
+
+
+        var questionState = 0; // variable - to show that the question that will be displayed will be the first from the array also known as 0
+        var score = 0; // the starting score will be 0 then will keep being added if an answer is correct
+
+        function update() { // function takes up less space as it means less repetition in the script
+            if (questionState == quizQuestions.length) { // if the questions displayed reached the questions lenght / the questions are finished then..
+                message.innerHTML = "Your score is " + score + "/" + quizQuestions.length;  // There will be a message saying "Your score is" then stating the score then saying "/15" to show the answers out of the question lenght.
+                questionSpace.innerHTML = ""; // to make the previous question showed not visible anymore
+                choiceSpace.innerHTML = ""; // to make the previous choices showed not visible anymore
+                questionImage.style.backgroundImage = "none"; // no image shown
+                level()
+            } else {  // if the questions havent finished rotating yet then..
+                questionSpace.innerHTML = quizQuestions[questionState]['question']; // in the choiceSpace section of the HTML wil show the quizQuestions array, only the 'question' part depending on the value of questionState
+                choiceSpace.innerHTML = ""; // to make the previous choices showed not visible anymore
+                questionImage.style.backgroundImage = "url('" + quizQuestions[questionState]['imageURL'] + "')"; //the questionImage will change style (accesing CSS properties) to change the backgroundImage to show a different one. Getting the url, aswell as in the Quiz Questions array, getting only the "imageURL" section. The quotation marks with "url" is so that the computer can know that the "imageURL" section are URL's and can identify them so that they will appear as an imageURL then show as an image.
+                quizQuestions[questionState]['choices'].forEach(function (choice) {  //The list of 'choices' from the quizQuestions array is retrieved depending on the current value of Question state. It then loops for each colour choice the following code:
+                    var divcolour = document.createElement('div'); //
+                    divcolour.className = 'color-option';
+                    divcolour.style.backgroundColor = choice;
+                    divcolour.addEventListener('click', function () { // the EventListener is attached to each colour div so when they are clicked it will trigger the submit(choice) function
+                        submit(choice); 
+                    });
+                    choiceSpace.appendChild(divcolour);
+                });
+            }
+        }
+
+        function level(){ // function for showing the message with score after quiz is finished
+            if (score < 5) { //if the score is less then 5 
+                levelMessage.innerHTML = "Not quite there yet, try again"; 
+               
+            } else if (score < 10) { // if the score is less than 10
+                levelMessage.innerHTML = "Pretty Good, room for improvement";
+
+            } else { // if the past two statements are false then this runs
+                levelMessage.innerHTML = "Great Job, you're a good seeker!";
+            }
+            
+        }
+
+        function submit(selectedChoice) { //function for when the question is submitted (automatically)
+            if (selectedChoice === quizQuestions[questionState]['answer']) { // if the choice selected is equal to the QuizQuestions in the ['answer'] then..
+                score++; // it will add to the variable 'score' which starts at 0. It adds to the score. (++ means adding 1)
+            } 
+            questionState++; // then questionState will be added to meaning the question will change. 
+            update(); // this function will start
+        }
+
+        update(); // function will start
+    </script>
+</body>
+</html>
