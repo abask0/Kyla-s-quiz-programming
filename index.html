@@ -26,7 +26,7 @@
             margin-left: 5%;
             margin-right: 5%;
         }
-        .color-option { /* styling for the div choice options - all same sizing and spacing*/
+        .colour-option { /* styling for the div choice options - all same sizing and spacing*/
             height: 200px;
             width: 260px;
             float: left;
@@ -87,7 +87,7 @@
             {
                 question: "What colour is the shirt Mr Beast is wearing?",
                 answer: "#8A6600",
-                choices: ["#8A6600", "#CC684B", "#1E9FB4", "#2C511B"],
+                choices: ["#1E9FB4", "#CC684B", "#8A6600", "#2C511B"],
                 imageURL: "BeastDesk.png" 
             },
             {
@@ -129,7 +129,7 @@
             {
                 question: "What colour is the hoodie Mr Beast is wearing?",
                 answer: "black",
-                choices: ["#8A6600", "black", "#1E9FB4", "#693A2D"],
+                choices: ["#8A6600", "1E9FB4", "#black", "#693A2D"],
                 imageURL: "BeastChocolate.png" 
             },
             {
@@ -165,13 +165,13 @@
                 choiceSpace.innerHTML = ""; // to make the previous choices showed not visible anymore
                 questionImage.style.backgroundImage = "url('" + quizQuestions[questionState]['imageURL'] + "')"; //the questionImage will change style (accesing CSS properties) to change the backgroundImage to show a different one. Getting the url, aswell as in the Quiz Questions array, getting only the "imageURL" section. The quotation marks with "url" is so that the computer can know that the "imageURL" section are URL's and can identify them so that they will appear as an imageURL then show as an image.
                 quizQuestions[questionState]['choices'].forEach(function (choice) {  //The list of 'choices' from the quizQuestions array is retrieved depending on the current value of Question state. It then loops for each colour choice the following code:
-                    var divcolour = document.createElement('div'); //
-                    divcolour.className = 'color-option';
-                    divcolour.style.backgroundColor = choice;
+                    var divcolour = document.createElement('div'); //creates a new 'div' element and stores it in th evariable 'divcolour'
+                    divcolour.className = 'colour-option'; //sets the class name to 'colour-option'. used for CSS
+                    divcolour.style.backgroundColor = choice; //sets the background colour of the div depending on the choice variable 
                     divcolour.addEventListener('click', function () { // the EventListener is attached to each colour div so when they are clicked it will trigger the submit(choice) function
                         submit(choice); 
                     });
-                    choiceSpace.appendChild(divcolour);
+                    choiceSpace.appendChild(divcolour); //this adds the divcolour element to the choiceSpace element, to make them appear on the choiceSpace area.
                 });
             }
         }
