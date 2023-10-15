@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<<<<<<< HEAD
     <title>Mr Beast Quiz</title>
     <style>
         #Title { color: rebeccapurple; font-size: 36px; }
+=======
+    <title>quioz</title>
+    <style>
+        #Title { color: rebeccapurple; font-size: 25px; }
+>>>>>>> bc0f9404a3a4713f8ef82ac631a7a91046b4f0f3
         #questiontracker { background-color: azure; }
         #Questionimage {
             height: 230px;
@@ -41,24 +47,26 @@
    
     <div id="Title">Kyla's Quiz</div>
     <h1 id="questionSpace"></h1>
+    <div id="questiontracker"> </div>
     <h2 id="message"></h2>
     <h3 id="levelMessage"></h3>
     <div id="Questionimage"></div>
-    <div id="choiceSpace"></div> 
+    <div id="choiceSpace"></div>
 
     <script>
-        var questionSpace = document.getElementById("questionSpace"); // The HTML id is gotten from its id and is assigned to the variable
+        var questionSpace = document.getElementById("questionSpace");
+        var questiontracker = document.getElementById("questiontracker");
         var message = document.getElementById("message");
         var levelMessage = document.getElementById("levelMessage")
         var questionImage = document.getElementById("Questionimage");
-        var choiceSpace = document.getElementById("choiceSpace"); 
+        var choiceSpace = document.getElementById("choiceSpace");
 
         var quizQuestions = [
             {
-                question: "What colour is the plant pot Mr Beast is hiding in?", //question shown - rotates after every answer
-                answer: "#018E9A", //answer is a colour and is one of the choices
-                choices: ["#664B84", "#3F4953", "#AA0439", "#018E9A"], //multiple colours - the divs automatically change to the colour of these choices
-                imageURL: "ShelfBeast.png" // for the image shown relating to the question rotating according to the question number
+                question: "What colour is the plant pot Mr Beast is hiding in?",
+                answer: "#018E9A",
+                choices: ["#664B84", "#3F4953", "#AA0439", "#018E9A"],
+                imageURL: "ShelfBeast.png" 
             },
             {
                 question: "What colour hoodie is Mr Beast wearing?",
@@ -133,6 +141,7 @@
                 imageURL: "BeastChocolate.png" 
             },
             {
+<<<<<<< HEAD
                 question: "What colour shirt is Mr Beast wearing?",
                 answer: "white",
                 choices: ["gray", "white", "#76373A", "black"],
@@ -143,6 +152,18 @@
                 answer: "black",
                 choices: ["black", "red", "darkblue", "gray"],
                 imageURL: "BeastBieber.png" 
+=======
+                question: "What colour is Mr Beast's shorts?",
+                answer: "white",
+                choices: ["black", "gray", "#3F434B", "white"],
+                imageURL: "BeastChallenge.png" 
+            },
+            {
+                question: "What colour is Mr Beast's shorts?",
+                answer: "white",
+                choices: ["black", "gray", "#3F434B", "white"],
+                imageURL: "BeastChallenge.png" 
+>>>>>>> bc0f9404a3a4713f8ef82ac631a7a91046b4f0f3
             },
     
     
@@ -150,6 +171,7 @@
             
 
 
+<<<<<<< HEAD
         var questionState = 0; // variable - to show that the question that will be displayed will be the first from the array also known as 0
         var score = 0; // the starting score will be 0 then will keep being added if an answer is correct
 
@@ -170,12 +192,35 @@
                     divcolour.style.backgroundColor = choice;
                     divcolour.addEventListener('click', function () { // the EventListener is attached to each colour div so when they are clicked it will trigger the submit(choice) function
                         submit(choice); 
+=======
+        var questionState = 0;
+        var score = 0;
+
+        function update() {
+            if (questionState == quizQuestions.length) {
+                message.innerHTML = "Your score is " + score + "/" + quizQuestions.length;
+                questionSpace.innerHTML = "";
+                choiceSpace.innerHTML = "";
+                questionImage.style.backgroundImage = "none"; 
+                level()
+            } else {
+                questionSpace.innerHTML = quizQuestions[questionState]['question'];
+                choiceSpace.innerHTML = "";
+                questionImage.style.backgroundImage = "url('" + quizQuestions[questionState]['imageURL'] + "')";
+                quizQuestions[questionState]['choices'].forEach(function (choice) {
+                    var divcolour = document.createElement('div');
+                    divcolour.className = 'color-option'; 
+                    divcolour.style.backgroundColor = choice;
+                    divcolour.addEventListener('click', function () {
+                        submit(choice);
+>>>>>>> bc0f9404a3a4713f8ef82ac631a7a91046b4f0f3
                     });
                     choiceSpace.appendChild(divcolour);
                 });
             }
         }
 
+<<<<<<< HEAD
         function level(){ // function for showing the message with score after quiz is finished
             if (score < 5) { //if the score is less then 5 
                 levelMessage.innerHTML = "Not quite there yet, try again"; 
@@ -185,10 +230,22 @@
 
             } else { // if the past two statements are false then this runs
                 levelMessage.innerHTML = "Great Job, you're a good seeker!";
+=======
+        function level(){
+            if (score < 5) {
+                levelMessage.innerHTML = "Try Again";
+               
+            } else if (score < 10) {
+                levelMessage.innerHTML = "Doing Alright";
+
+            } else {
+                levelMessage.innerHTML = "Great Job";
+>>>>>>> bc0f9404a3a4713f8ef82ac631a7a91046b4f0f3
             }
             
         }
 
+<<<<<<< HEAD
         function submit(selectedChoice) { //function for when the question is submitted (automatically)
             if (selectedChoice === quizQuestions[questionState]['answer']) { // if the choice selected is equal to the QuizQuestions in the ['answer'] then..
                 score++; // it will add to the variable 'score' which starts at 0. It adds to the score. (++ means adding 1)
@@ -198,6 +255,17 @@
         }
 
         update(); // function will start
+=======
+        function submit(selectedChoice) {
+            if (selectedChoice === quizQuestions[questionState]['answer']) {
+                score++;
+            }
+            questionState++;
+            update();
+        }
+
+        update();
+>>>>>>> bc0f9404a3a4713f8ef82ac631a7a91046b4f0f3
     </script>
 </body>
 </html>
