@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <title>Mr Beast Quiz</title>
     <style>
         #Title { color: rebeccapurple; font-size: 36px; }
         #questiontracker { background-color: azure; }
         #Questionimage {
-            height: 230px;
-            width: 430px;
+            height: 250px;
+            width: 450px;
             background-size: cover;
             background-position: center;
             text-align: center;
-            margin: 0 auto; /* to center the div */
+            margin: 0 auto; 
             margin-top: 12px; 
             margin-bottom: 12px; 
         }
@@ -26,7 +25,7 @@
             margin-left: 5%;
             margin-right: 5%;
         }
-        .colour-option { /* styling for the div choice options - all same sizing and spacing*/
+        .colour-option { 
             height: 200px;
             width: 260px;
             float: left;
@@ -169,7 +168,7 @@
                     divcolour.className = 'colour-option'; //sets the class name to 'colour-option'. used for CSS
                     divcolour.style.backgroundColor = choice; //sets the background colour of the div depending on the choice variable 
                     divcolour.addEventListener('click', function () { // the EventListener is attached to each colour div so when they are clicked it will trigger the submit(choice) function
-                        submit(choice); 
+                        submit(choice); //runs the function submit for every choice
                     });
                     choiceSpace.appendChild(divcolour); //this adds the divcolour element to the choiceSpace element, to make them appear on the choiceSpace area.
                 });
